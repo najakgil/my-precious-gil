@@ -23,7 +23,8 @@ type Presence = {
     x: number;
     y: number;
   } | null;
-  message: string;
+  cursorColor: string | null;
+  editingText: string | null;
 };
 
 // Optionally, Storage represents the shared document that persists in the
