@@ -1,23 +1,32 @@
-import React from "react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Work_Sans } from "next/font/google";
+
 import "./globals.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const inter = Inter({ subsets: ["latin"] });
+import Room from "./Room";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "najakgil",
-  description: "My precious gilyeo",
+  description: "my precious gil yeo president",
+  icons: {
+    icon: "/assets/logo.png",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
-}
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  weight: ["400", "600", "700"],
+});
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html lang="en">
+    <body className={`${workSans.className} bg-white`}>
+      <Room>
+        <TooltipProvider>{children}</TooltipProvider>
+      </Room>
+    </body>
+  </html>
+);
+
+export default RootLayout;
