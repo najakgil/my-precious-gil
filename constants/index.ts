@@ -33,6 +33,14 @@ export const shapeElements = [
   },
 ];
 
+export const loaderElements = [
+  { gif: "/loader/loader_1.gif", name: "Loader 1", color: "#FBFBFB" },
+  { gif: "/loader/loader_2.gif", name: "Loader 2", color: "#FBFBFB" },
+  { gif: "/loader/loader_3.gif", name: "Loader 3", color: "#FBFBFB" },
+  { gif: "/loader/loader_4.gif", name: "Loader 4", color: "#268FF7" },
+  { gif: "/loader/loader_5.gif", name: "Loader 5", color: "#83BFF" },
+];
+
 export const navElements = [
   {
     icon: "/assets/select.svg",
@@ -271,7 +279,7 @@ export const characterElements = [
   },
   {
     id: 13,
-    imgUrl:  "/character/scrub-1.png",
+    imgUrl: "/character/scrub-1.png",
     name: "Scrub 1",
   },
   {
@@ -289,11 +297,11 @@ export const characterElements = [
     imgUrl: "/character/scrub-4.png",
     name: "Scrub 4",
   },
- {
-  id: 17,
-  imgUrl: "/character/suit-1.png",
-  name: "Suit 1",
- },
+  {
+    id: 17,
+    imgUrl: "/character/suit-1.png",
+    name: "Suit 1",
+  },
   {
     id: 18,
     imgUrl: "/character/suit-2.png",
