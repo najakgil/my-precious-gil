@@ -112,7 +112,7 @@ const RenderSelect = ({
         <SelectItem
           key={option.value}
           value={option.value}
-          className=" hover:bg-primary-green hover:text-primary-black"
+          className=" hover:bg-[#2294FF] hover:text-primary-black"
         >
           {option.label}
         </SelectItem>
