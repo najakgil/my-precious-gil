@@ -115,3 +115,37 @@ export const exportToPdf = () => {
 
   doc.save("canvas.pdf");
 };
+
+export const exportToPng = () => {
+  const canvas = document.querySelector("canvas");
+
+  if (!canvas) return;
+
+  // 임시 캔버스를 생성하여 배경색을 설정하고 원본 캔버스를 복사
+  const tempCanvas = document.createElement("canvas");
+  const context = tempCanvas.getContext("2d");
+
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+
+  // 배경색 설정
+  // @ts-ignore
+  context.fillStyle = "white";
+  // @ts-ignore
+  context.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+  // 원본 캔버스의 내용을 임시 캔버스로 복사
+  // @ts-ignore
+  context.drawImage(canvas, 0, 0);
+
+  // 임시 캔버스의 데이터를 PNG 포맷으로 변환
+  const dataURL = tempCanvas.toDataURL("image/png");
+
+  // 다운로드를 위한 a 태그 생성
+  const link = document.createElement("a");
+  link.href = dataURL;
+  link.download = "najakgil.png";
+
+  // a 태그 클릭 이벤트 트리거
+  link.click();
+};

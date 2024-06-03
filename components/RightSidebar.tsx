@@ -5,8 +5,9 @@ import { bringElement, modifyShape } from "@/lib/shapes";
 
 import Text from "./settings/Text";
 import Color from "./settings/Color";
-import Export from "./settings/Export";
 import Dimensions from "./settings/Dimensions";
+import ExportToPdf from "./settings/ExportToPdf";
+import ExportToPnG from "./settings/ExportPng";
 
 const RightSidebar = ({
   elementAttributes,
@@ -71,7 +72,8 @@ const RightSidebar = ({
           handleInputChange={handleInputChange}
         />
 
-        <Export />
+        <ExportToPdf />
+        <ExportToPnG />
       </section>
     ),
     [elementAttributes],

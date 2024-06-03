@@ -26,6 +26,7 @@ export const initializeFabric = ({
   const canvas = new fabric.Canvas(canvasRef.current, {
     width: canvasElement?.clientWidth,
     height: canvasElement?.clientHeight,
+    backgroundColor: "white",
   });
 
   fabricRef.current = canvas;
