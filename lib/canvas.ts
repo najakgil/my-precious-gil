@@ -40,7 +40,6 @@ export const handleCanvasMouseDown = ({
   isDrawing,
   shapeRef,
 }: CanvasMouseDown) => {
-  console.log("options", options);
   const pointer = canvas.getPointer(options.e);
 
   const target = canvas.findTarget(options.e, false);
@@ -128,6 +127,13 @@ export const handleCanvaseMouseMove = ({
         width: pointer.x - (shapeRef.current?.left || 0),
         height: pointer.y - (shapeRef.current?.top || 0),
       });
+
+    case "character":
+      shapeRef.current?.set({
+        left: pointer.x - (shapeRef.current?.width || 0),
+        top: pointer.y - (shapeRef.current?.height || 0),
+      });
+      break;
 
     default:
       break;

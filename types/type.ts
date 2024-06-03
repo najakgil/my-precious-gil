@@ -117,6 +117,8 @@ export type NavbarProps = {
   activeElement: ActiveElement;
   imageInputRef: React.MutableRefObject<HTMLInputElement | null>;
   handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCharacterUpload: any;
+  handleStickerUpload: any;
   handleActiveElement: (element: ActiveElement) => void;
 };
 
@@ -139,6 +141,8 @@ export type ChoiceSheetProps = {
     value: string;
   };
   handleActiveElement: any;
+  handleCharacterUpload: any;
+  handleStickerUpload: any;
 };
 
 export type Presence = any;

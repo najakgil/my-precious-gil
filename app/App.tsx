@@ -21,9 +21,9 @@ import {
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
 import { handleImageUpload } from "@/lib/shapes";
-import { handleCharacterUpload, handleStickerUpload } from "@/lib/characters";
 import { defaultNavElement } from "@/constants";
 import { ActiveElement, Attributes } from "@/types/type";
+import { handleCharacterUpload } from "@/lib/characters";
 
 const Home = () => {
   const undo = useUndo();
@@ -291,6 +291,25 @@ const Home = () => {
             syncShapeInStorage,
           });
         }}
+
+        handleCharacterUpload={(imgUrl: string) => {
+          handleCharacterUpload({
+            imgUrl,
+            canvas: fabricRef as any,
+            shapeRef,
+            syncShapeInStorage,
+          });
+        }}
+
+        handleStickerUpload={(imgUrl: string) => {
+          handleCharacterUpload({
+            imgUrl,
+            canvas: fabricRef as any,
+            shapeRef,
+            syncShapeInStorage,
+          });
+        }}
+        
         handleActiveElement={handleActiveElement}
       />
 

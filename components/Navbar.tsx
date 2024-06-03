@@ -16,6 +16,8 @@ const Navbar = ({
   activeElement,
   imageInputRef,
   handleImageUpload,
+  handleCharacterUpload,
+  handleStickerUpload,
   handleActiveElement,
 }: NavbarProps) => {
   const isActive = (value: string | Array<ActiveElement>) =>
@@ -66,6 +68,8 @@ const Navbar = ({
             ) : item?.value === "character" || item?.value === "sticker" ? (
               <ChoiceSheet
                 item={item}
+                handleCharacterUpload={handleCharacterUpload}
+                handleStickerUpload={handleStickerUpload}
                 handleActiveElement={handleActiveElement}
               />
             ) : (
@@ -75,6 +79,8 @@ const Navbar = ({
                   alt={item.name}
                   fill
                   className={isActive(item.value) ? "invert" : ""}
+                  onClick={() => {
+                  }}
                 />
               </Button>
             )}
