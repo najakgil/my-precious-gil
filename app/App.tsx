@@ -24,8 +24,10 @@ import { handleImageUpload } from "@/lib/shapes";
 import { defaultNavElement } from "@/constants";
 import { ActiveElement, Attributes } from "@/types/type";
 import { handleCharacterUpload } from "@/lib/characters";
+import { SlangList } from "@/constants/slang-list";
 
 const Home = () => {
+  const [isSlangUsed, setIsSlangUsed] = useState(false);
   const undo = useUndo();
   const redo = useRedo();
   const canvasObjects = useStorage((root) => root.canvasObjects);
@@ -41,6 +43,14 @@ const Home = () => {
   const activeObjectRef = useRef<fabric.Object | null>(null);
   const isEditingRef = useRef(false);
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  // TO DO : alert 대신 토스트로 변경
+  useEffect(() => {
+    if (isSlangUsed) {
+      alert('비속어 탐지');
+    }
+    setIsSlangUsed(false);
+  }, [isSlangUsed]);
 
   // [네비게이션] 네이비게이션 요소
   const [activeElement, setActiveElement] = useState<ActiveElement>({
@@ -205,11 +215,19 @@ const Home = () => {
 
     // [캔버스] 선택된 도형
     canvas.on("selection:created", (options) => {
+      const isSlang = (textValue: string) => {
+        if (!textValue) return false;
+        return SlangList.some((slang) => textValue.includes(slang));
+      };
       handleCanvasSelectionCreated({
         options,
         isEditingRef,
         setElementAttributes,
       });
+      // @ts-ignore
+      const containsSlang = isSlang(options?.selected[0]?.text);
+      setIsSlangUsed(containsSlang);
+      console.log('Slang detected:', containsSlang);
     });
 
     // [캔버스] 도형 크기 조정
@@ -291,7 +309,6 @@ const Home = () => {
             syncShapeInStorage,
           });
         }}
-
         handleCharacterUpload={(imgUrl: string) => {
           handleCharacterUpload({
             imgUrl,
@@ -300,7 +317,6 @@ const Home = () => {
             syncShapeInStorage,
           });
         }}
-
         handleStickerUpload={(imgUrl: string) => {
           handleCharacterUpload({
             imgUrl,
@@ -309,7 +325,6 @@ const Home = () => {
             syncShapeInStorage,
           });
         }}
-        
         handleActiveElement={handleActiveElement}
       />
 
