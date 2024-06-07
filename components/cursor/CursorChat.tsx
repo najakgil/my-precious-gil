@@ -1,5 +1,7 @@
 import { CursorChatProps, CursorMode } from "@/types/type";
 import CursorSVG from "@/public/assets/CursorSVG";
+import { useState } from "react";
+import { SlangList } from "@/constants/slang-list";
 
 const CursorChat = ({
   cursor,
@@ -7,6 +9,17 @@ const CursorChat = ({
   setCursorState,
   updateMyPresence,
 }: CursorChatProps) => {
+  const [isSlangUsed, setIsSlangUsed] = useState(false);
+
+  const checkSlang = (message: string) => {
+    SlangList.some((slang) => {
+      if (message.toLowerCase().includes(slang)) {
+        setIsSlangUsed(true);
+        return true;
+      }
+    });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateMyPresence({ message: e.target.value });
     setCursorState({
@@ -14,6 +27,7 @@ const CursorChat = ({
       previousMessage: null,
       message: e.target.value,
     });
+    checkSlang(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,10 +38,12 @@ const CursorChat = ({
         previousMessage: cursorState.message,
         message: "",
       });
+      setIsSlangUsed(false);
     } else if (e.key === "Escape") {
       setCursorState({
         mode: CursorMode.Hidden,
       });
+      setIsSlangUsed(false);
     }
   };
 
@@ -60,7 +76,9 @@ const CursorChat = ({
               placeholder={cursorState.previousMessage ? "" : "Say something…"}
               value={cursorState.message}
               maxLength={50}
+              onBlur={() => checkSlang(cursorState.message)}
             />
+            {isSlangUsed && <div style={{ color: "red" }}>나쁜 말 떼끼!!!</div>}
           </div>
         </>
       )}
